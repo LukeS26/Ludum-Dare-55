@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour {
     public GameObject model;
 
     Quaternion movementRotation;
-    Quaternion slerp_point = Quaternion.Euler(0, 0, 0);
+    Quaternion slerpPoint = Quaternion.Euler(0, 0, 0);
 
     Vector2 playerMovementVector = Vector2.zero;
     Vector2 playerLookVector = Vector2.zero;
@@ -55,15 +55,15 @@ public class PlayerController : MonoBehaviour {
         if ( playerMovementVector.magnitude > 0) { 
             // Flips sprite based on left/right movement
             if (playerMovementVector.x > 0) {
-                slerp_point = Quaternion.Euler(0, 0, 0);
+                slerpPoint = Quaternion.Euler(0, 0, 0);
             } else if (playerMovementVector.x < 0) {
-                slerp_point = Quaternion.Euler(0, 180, 0);
+                slerpPoint = Quaternion.Euler(0, 180, 0);
             }
 
             // Flips sprite based on forward/backward movement
             animator.SetBool("show_back", playerMovementVector.y > 0);
 
-            Quaternion rotation = Quaternion.Slerp(model.transform.localRotation, slerp_point, 10 * Time.deltaTime);
+            Quaternion rotation = Quaternion.Slerp(model.transform.localRotation, slerpPoint, 10 * Time.deltaTime);
 
             model.transform.localEulerAngles = new Vector3(
                 0,

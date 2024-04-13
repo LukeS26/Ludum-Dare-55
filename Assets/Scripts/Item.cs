@@ -3,14 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Item : MonoBehaviour {
+    Transform target;
+    Vector3 initialPoint;
+    float slerpTime = 0;
+
     void Update() {
         transform.rotation = Camera.main.transform.rotation;
     }
 
-    public void SetPoint(Transform point) {
-        transform.parent = point;
-        transform.localPosition = Vector3.zero;
+    void FixedUpdate() {
+        if(target) {
+            slerpTime += Time.deltaTime;
+            transform.position = Vector3.Slerp(initialPoint, target.position, slerpTime);
+        }
+    }
 
+    public void SetPoint(Transform point) {
         GetComponent<Rigidbody>().isKinematic = true;
+
+        initialPoint = transform.position;
+        target = point;
     }
 }
