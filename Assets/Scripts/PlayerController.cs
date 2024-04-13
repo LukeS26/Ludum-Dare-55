@@ -29,6 +29,12 @@ public class PlayerController : MonoBehaviour {
         EnsureComponentsExist();
     }
 
+    void Update() {
+        EnsureComponentsExist();
+
+        FixRotation();
+    }
+
     void FixedUpdate() {
         EnsureComponentsExist();
 
@@ -43,6 +49,7 @@ public class PlayerController : MonoBehaviour {
         gravity += Time.deltaTime * 9.8f;
 
         HandleRotation();
+        FixRotation();
 
         if ( movement.magnitude > 0) { 
             // Flips sprite based on left/right movement
@@ -68,6 +75,39 @@ public class PlayerController : MonoBehaviour {
         animator.SetBool("sprinting", sprinting);
     }
 
+    void CameraControl(Vector2 input) {
+        Vector2 lookVector = input;
+
+        camVals.x += lookVector.x;
+        camVals.x %= 2 * Mathf.PI;
+        
+        camVals.y += lookVector.y;
+
+        if(camVals.y > 2f) { camVals.y = 2f; }
+        if(camVals.y < 0f) { camVals.y = 0f; }
+    }
+
+    void FixRotation() {
+        Vector3 cameraPos = new Vector3();
+
+        cameraPos.x = Mathf.Cos(camVals.x) * 1.5f;
+        cameraPos.z = Mathf.Sin(camVals.x) * 1.5f;
+        cameraPos.y = camVals.y;
+
+        Camera.main.transform.localPosition = (cameraPos * (2.5f + (0.5f * cameraPos.y * cameraPos.y) ));
+
+        Vector3 offset = Camera.main.transform.right;
+        Vector3 lookPos = new Vector3(0, 2, 0) - Camera.main.transform.localPosition;
+
+        Camera.main.transform.rotation = Quaternion.LookRotation(lookPos, transform.up );
+
+        model.transform.parent.localEulerAngles = new Vector3(
+            0, 
+            Camera.main.transform.rotation.eulerAngles.y, 
+            0
+        );
+    }
+
     void HandleRotation() {
         if(playerMovementVector.magnitude > 0) {
             //Looks away from camera
@@ -88,6 +128,11 @@ public class PlayerController : MonoBehaviour {
 
     public void MovementAction(InputAction.CallbackContext obj) {
         playerMovementVector = obj.ReadValue<Vector2>();
+    }
+
+    public void CameraAction(InputAction.CallbackContext obj) {
+        CameraControl(obj.ReadValue<Vector2>());
+        FixRotation();
     }
 
     public void SprintAction(InputAction.CallbackContext obj) {
