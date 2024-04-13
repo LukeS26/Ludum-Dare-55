@@ -245,6 +245,17 @@
                 },
                 {
                     "name": "",
+                    "id": "d2b28b9e-f385-4955-87d8-c756232e0140",
+                    "path": "<Gamepad>/{Menu}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Grimoire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "6103f7b6-e25d-4061-a0f2-88894cf331fe",
                     "path": "<Keyboard>/anyKey",
                     "interactions": "",
@@ -258,6 +269,50 @@
                     "name": "",
                     "id": "2d2f145f-97f7-48c7-9594-f774c8a035fe",
                     "path": "<Mouse>/press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CloseStart",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ad18aa93-aa35-4da9-986c-cd611389d58b",
+                    "path": "<Gamepad>/{PrimaryAction}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CloseStart",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "40529245-380b-4236-a4cb-28c4263e59c0",
+                    "path": "<Gamepad>/{SecondaryAction}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CloseStart",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b83879a7-dd61-4eba-9737-efcedfa735ce",
+                    "path": "<Gamepad>/{Submit}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CloseStart",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "92aef297-5f86-49bd-bef0-a68552b9b45a",
+                    "path": "<Gamepad>/{Menu}",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
