@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour {
     void Update() {
         EnsureComponentsExist();
 
+        CameraControl();
         FixRotation();
     }
 
@@ -48,6 +49,7 @@ public class PlayerController : MonoBehaviour {
 
         gravity += Time.deltaTime * 9.8f;
 
+        CameraControl();
         HandleRotation();
         FixRotation();
 
@@ -75,13 +77,11 @@ public class PlayerController : MonoBehaviour {
         animator.SetBool("sprinting", sprinting);
     }
 
-    void CameraControl(Vector2 input) {
-        Vector2 lookVector = input;
-
-        camVals.x += lookVector.x;
+    void CameraControl() {
+        camVals.x += playerLookVector.x;
         camVals.x %= 2 * Mathf.PI;
         
-        camVals.y += lookVector.y;
+        camVals.y += playerLookVector.y;
 
         if(camVals.y > 2f) { camVals.y = 2f; }
         if(camVals.y < 0f) { camVals.y = 0f; }
@@ -99,7 +99,7 @@ public class PlayerController : MonoBehaviour {
         Vector3 offset = Camera.main.transform.right;
         Vector3 lookPos = new Vector3(0, 2, 0) - Camera.main.transform.localPosition;
 
-        Camera.main.transform.rotation = Quaternion.LookRotation(lookPos, transform.up );
+        Camera.main.transform.rotation = Quaternion.LookRotation(lookPos, transform.up);
 
         model.transform.parent.localEulerAngles = new Vector3(
             0, 
@@ -131,8 +131,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     public void CameraAction(InputAction.CallbackContext obj) {
-        CameraControl(obj.ReadValue<Vector2>());
-        FixRotation();
+        playerLookVector = obj.ReadValue<Vector2>();
     }
 
     public void SprintAction(InputAction.CallbackContext obj) {

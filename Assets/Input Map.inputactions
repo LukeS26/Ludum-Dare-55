@@ -169,7 +169,7 @@
                     "id": "d5806fbf-bf4b-4279-9b77-34e75048ddd4",
                     "path": "<Mouse>/delta",
                     "interactions": "",
-                    "processors": "InvertVector2,ScaleVector2(x=0.01,y=0.01)",
+                    "processors": "InvertVector2,ScaleVector2(x=0.001,y=0.001)",
                     "groups": "",
                     "action": "Look",
                     "isComposite": false,
