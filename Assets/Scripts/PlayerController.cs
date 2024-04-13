@@ -49,7 +49,6 @@ public class PlayerController : MonoBehaviour {
 
         gravity += Time.deltaTime * 9.8f;
 
-        CameraControl();
         HandleRotation();
         FixRotation();
 
@@ -78,10 +77,10 @@ public class PlayerController : MonoBehaviour {
     }
 
     void CameraControl() {
-        camVals.x += playerLookVector.x;
+        camVals.x += playerLookVector.x * Time.deltaTime;
         camVals.x %= 2 * Mathf.PI;
         
-        camVals.y += playerLookVector.y;
+        camVals.y += playerLookVector.y * Time.deltaTime;
 
         if(camVals.y > 2f) { camVals.y = 2f; }
         if(camVals.y < 0f) { camVals.y = 0f; }
