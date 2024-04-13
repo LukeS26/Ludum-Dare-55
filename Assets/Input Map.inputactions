@@ -222,9 +222,27 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Grimoire",
+                    "name": "ToggleGrimoire",
                     "type": "Button",
                     "id": "58822c69-eadf-4fb3-ad26-0859f88ffd35",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "FlipForward",
+                    "type": "Button",
+                    "id": "42edf634-2156-4910-b953-89a7ada5ea93",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "FlipBackward",
+                    "type": "Button",
+                    "id": "5b94e6d4-3612-4013-ac61-8ac8e46d8dec",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -239,7 +257,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Grimoire",
+                    "action": "ToggleGrimoire",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -250,7 +268,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Grimoire",
+                    "action": "ToggleGrimoire",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -317,6 +335,72 @@
                     "processors": "",
                     "groups": "",
                     "action": "CloseStart",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "545cd4a4-7ed6-472a-b72c-b6be1e7e304e",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "FlipForward",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "be84b95e-cc32-470a-be6c-10011032677e",
+                    "path": "<Gamepad>/dpad/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "FlipForward",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "480351e0-a167-45c5-9205-9d00c8e3b52a",
+                    "path": "<Joystick>/stick/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "FlipForward",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "47974d60-cec1-44d1-aaff-fee30025195d",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "FlipBackward",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9d6fe06d-4c4b-432d-8158-3346ccc35af3",
+                    "path": "<Gamepad>/dpad/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "FlipBackward",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4429c6ef-aa68-4715-89be-d5ae9f493173",
+                    "path": "<Joystick>/stick/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "FlipBackward",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

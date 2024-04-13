@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     public static bool gameActive, gameStarted;
 
     // Integer Variables
+    private int currPage;
 
     // BoxCollider2D Variables
 
@@ -45,6 +46,11 @@ public class GameManager : MonoBehaviour
     {
         gameActive = false;
         gameStarted = false;
+
+        currPage = 0;
+        
+        DeactivatePages();
+        SetToPage(currPage);
         OpenStart();
     }
 
@@ -74,6 +80,25 @@ public class GameManager : MonoBehaviour
         grimoire.SetActive(true);
     }
 
+    // Sets the Grimoire to the provided page
+    private void SetToPage(int page)
+    {
+        // deactivates previous page if one exists
+        if(page > 0)
+        { grimoire.transform.GetChild(page - 1).gameObject.SetActive(false); }
+        if(page < (grimoire.transform.childCount - 1))
+        { grimoire.transform.GetChild(page + 1).gameObject.SetActive(false); }
+
+        grimoire.transform.GetChild(page).gameObject.SetActive(true);
+    }
+
+    // Deactivates each page in the Grimoire
+    private void DeactivatePages()
+    {
+        for(int i = 0; i < grimoire.transform.childCount; i++)
+        { grimoire.transform.GetChild(i).gameObject.SetActive(false); }
+    }
+
     #endregion
 
     #region Input
@@ -82,23 +107,31 @@ public class GameManager : MonoBehaviour
     private void OnEnable()
     {
         /* input.Enable();
-        input.Menus.Grimoire.performed += OnPausePerformed;
-        input.Menus.CloseStart.performed += OnStartPerformed; */
+        input.Menus.ToggleGrimoire.performed += OnPausePerformed;
+        input.Menus.CloseStart.performed += OnStartPerformed;
+        input.Menus.FlipForward.performed += OnFlipForwardPerformed;
+        input.Menus.FlipBackward.performed += OnFlipBackwardPerformed; */
     }
 
     // Called when the script is disabled
     private void OnDisable()
     {
         /* input.Disable();
-        input.Menus.Grimoire.performed -= OnPausePerformed;
-        input.Menus.CloseStart.performed -= OnStartPerformed; */
+        input.Menus.ToggleGrimoire.performed -= OnPausePerformed;
+        input.Menus.CloseStart.performed -= OnStartPerformed;
+        input.Menus.FlipForward.performed -= OnFlipForwardPerformed;
+        input.Menus.FlipBackward.performed -= OnFlipBackwardPerformed; */
     }
 
     // Called when any of the binds associated with PauseMenu in input are used
     private void OnPausePerformed(InputAction.CallbackContext context)
     {
         // only opens the pause menu if the game is active
-        if(grimoire.activeSelf) { CloseMenus(); }
+        if(grimoire.activeSelf)
+        { 
+            CloseMenus();
+            gameActive = true;
+        }
         else if(gameStarted) { OpenGrimoire(); }
     }
 
@@ -106,7 +139,27 @@ public class GameManager : MonoBehaviour
     private void OnStartPerformed(InputAction.CallbackContext context)
     {
         // only opens the level selection menu if the start menu is active
-        if(startScreen.activeSelf) { CloseMenus(); }
+        if(startScreen.activeSelf) 
+        { 
+            CloseMenus();
+            gameStarted = true;
+        }
+    }
+
+    // Flips the Grimoire forward a page (if any are left)
+    private void OnFlipForwardPerformed(InputAction.CallbackContext context)
+    {
+        // ensures Grimoire is open first
+        if((grimoire.activeSelf) && (currPage + 1 < grimoire.transform.childCount))
+        { SetToPage(++currPage); }
+    }
+
+    // Flips the Grimoire backward a page (if any are left)
+    private void OnFlipBackwardPerformed(InputAction.CallbackContext context)
+    {
+        // ensures Grimoire is open first
+        if((grimoire.activeSelf) && (currPage - 1 >= 0))
+        { SetToPage(--currPage); }
     }
 
     #endregion
