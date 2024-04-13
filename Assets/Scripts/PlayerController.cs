@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour {
 
     CharacterController controller;
     Animator animator;
+    SpriteRenderer renderer;
 
     bool sprinting;
     bool crouching;
@@ -62,6 +63,7 @@ public class PlayerController : MonoBehaviour {
 
             // Flips sprite based on forward/backward movement
             animator.SetBool("show_back", playerMovementVector.y > 0);
+            renderer.flipX = playerMovementVector.y > 0;
 
             Quaternion rotation = Quaternion.Slerp(model.transform.localRotation, slerpPoint, 10 * Time.deltaTime);
 
@@ -74,7 +76,7 @@ public class PlayerController : MonoBehaviour {
 
         animator.SetBool("crouching", crouching);
         animator.SetBool("sprinting", sprinting);
-        animator.SetBool("moving", movement.magnitude > 0);
+        animator.SetBool("moving", playerMovementVector.magnitude > 0.01f);
     }
 
     void CameraControl() {
@@ -124,6 +126,7 @@ public class PlayerController : MonoBehaviour {
     void EnsureComponentsExist() {
         if (controller == null) { controller = GetComponent<CharacterController>(); }
         if (animator == null) { animator = model.GetComponent<Animator>(); }
+        if (renderer == null) { renderer = model.GetComponent<SpriteRenderer>(); }
     }
 
     public void MovementAction(InputAction.CallbackContext obj) {
@@ -150,5 +153,9 @@ public class PlayerController : MonoBehaviour {
         if (!obj.performed) { return; }
         if (!controller.isGrounded) { return; }
         gravity = -7f;
+    }
+
+    public void DrawAction(InputAction.CallbackContext obj) {
+
     }
 }

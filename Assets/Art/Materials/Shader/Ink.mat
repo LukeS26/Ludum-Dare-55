@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-3552050638727280192
+--- !u!114 &-6007391960312076882
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,8 +20,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Pentagram
-  m_Shader: {fileID: -6465566751694194690, guid: c7d38e9e087d6d2a6871d7257b6dc866, type: 3}
+  m_Name: Ink
+  m_Shader: {fileID: -6465566751694194690, guid: 91e62ec35dd9bb9a99522480ea312abf, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -61,7 +61,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: fd554749fc8a4463eba7d99848fb3fd8, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -74,6 +74,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _RefractionNormal:
+        m_Texture: {fileID: 2800000, guid: 4dad714f5dd3b2eab8c5b7819a49fd93, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
@@ -103,22 +107,28 @@ Material:
     - _ClearCoatSmoothness: 0
     - _Cull: 2
     - _Cutoff: 0.5
+    - _Depth: 1
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
-    - _Draw_Time: 5
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
+    - _FoamAmount: 2
+    - _FoamScale: 50
+    - _FoamSpeed: 1
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Metallic: 0
+    - _NormalStrength: 0.1
     - _OcclusionStrength: 1
     - _Parallax: 0.005
-    - _Percent: 0
+    - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Smoothness: 0.5
+    - _RefractionSpeed: 0.01
+    - _RefractionStrength: 0.5
+    - _Smoothness: 0.55
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -130,6 +140,8 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _PlayerPosition: {r: 0, g: 0, b: 0, a: 0}
+    - _PlayerVelocity: {r: 0, g: 0, b: 0, a: 0}
+    - _RefractionScale: {r: 0.5, g: 0.5, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _Sprite: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
