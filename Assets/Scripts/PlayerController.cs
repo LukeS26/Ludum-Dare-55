@@ -47,12 +47,12 @@ public class PlayerController : MonoBehaviour {
             gravity = 0;
         }
 
-        gravity += Time.deltaTime * 9.8f;
+        gravity += Time.deltaTime * 15;
 
         HandleRotation();
         FixRotation();
 
-        if ( movement.magnitude > 0) { 
+        if ( playerMovementVector.magnitude > 0) { 
             // Flips sprite based on left/right movement
             if (playerMovementVector.x > 0) {
                 slerp_point = Quaternion.Euler(0, 0, 0);
@@ -66,7 +66,7 @@ public class PlayerController : MonoBehaviour {
             Quaternion rotation = Quaternion.Slerp(model.transform.localRotation, slerp_point, 10 * Time.deltaTime);
 
             model.transform.localEulerAngles = new Vector3(
-                0, 
+                0,
                 rotation.eulerAngles.y, 
                 0
             );
@@ -74,6 +74,7 @@ public class PlayerController : MonoBehaviour {
 
         animator.SetBool("crouching", crouching);
         animator.SetBool("sprinting", sprinting);
+        animator.SetBool("moving", movement.magnitude > 0);
     }
 
     void CameraControl() {
@@ -134,14 +135,20 @@ public class PlayerController : MonoBehaviour {
     }
 
     public void SprintAction(InputAction.CallbackContext obj) {
-        sprinting = !obj.canceled;
+        sprinting = obj.performed;
 
-        if(!obj.canceled) { crouching = false; }
+        if(obj.performed) { crouching = false; }
     }
 
     public void CrouchAction(InputAction.CallbackContext obj) {
-        crouching = !obj.canceled;
+        crouching = obj.performed;
 
-        if(!obj.canceled) { sprinting = false; }
+        if(obj.performed) { sprinting = false; }
+    }
+
+    public void JumpAction(InputAction.CallbackContext obj) {
+        if (!obj.performed) { return; }
+        if (!controller.isGrounded) { return; }
+        gravity = -7f;
     }
 }
