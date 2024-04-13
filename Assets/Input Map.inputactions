@@ -37,7 +37,7 @@
                     "type": "Value",
                     "id": "9560c500-78fd-47c8-9b00-60cefc4fe26f",
                     "expectedControlType": "Vector2",
-                    "processors": "ScaleVector2(x=0.01,y=0.01)",
+                    "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
                 }
@@ -158,7 +158,7 @@
                     "id": "03d1116e-9de0-4268-bbf2-7b82242ecd13",
                     "path": "<Gamepad>/rightStick",
                     "interactions": "",
-                    "processors": "",
+                    "processors": "ScaleVector2(x=0.1,y=0.1)",
                     "groups": "",
                     "action": "Look",
                     "isComposite": false,
@@ -169,7 +169,7 @@
                     "id": "d5806fbf-bf4b-4279-9b77-34e75048ddd4",
                     "path": "<Mouse>/delta",
                     "interactions": "",
-                    "processors": "InvertVector2",
+                    "processors": "InvertVector2,ScaleVector2(x=0.01,y=0.01)",
                     "groups": "",
                     "action": "Look",
                     "isComposite": false,
