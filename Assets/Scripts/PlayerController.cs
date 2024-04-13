@@ -23,6 +23,8 @@ public class PlayerController : MonoBehaviour {
     float gravity = 0;
     float moveSpeed = 10;
 
+    GameObject[] inventory = new GameObject[3];
+
     void Awake() {
         EnsureComponentsExist();
     }
@@ -61,6 +63,9 @@ public class PlayerController : MonoBehaviour {
                 0
             );
         }        
+
+        animator.SetBool("crouching", crouching);
+        animator.SetBool("sprinting", sprinting);
     }
 
     void HandleRotation() {
@@ -74,18 +79,6 @@ public class PlayerController : MonoBehaviour {
             movementRotation = Quaternion.LookRotation(-look, transform.up);
             movementRotation = Quaternion.Euler(0, movementRotation.eulerAngles.y, 0);
         }
-    }
-
-    void CameraControl(Vector2 input) {
-        Vector2 lookVector = input;
-
-        camVals.x += lookVector.x;
-        camVals.x %= 2 * Mathf.PI;
-        
-        camVals.y += lookVector.y;
-
-        if(camVals.y > 2f) { camVals.y = 2f; }
-        if(camVals.y < 0f) { camVals.y = 0f; }
     }
 
     void EnsureComponentsExist() {
