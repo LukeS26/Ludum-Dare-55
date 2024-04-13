@@ -9,15 +9,17 @@ public class PlayerController : MonoBehaviour {
     public GameObject model;
 
     Quaternion movementRotation;
-    Quaternion slerp_point = Quaternion.Euler(0, 45, 0);
+    Quaternion slerp_point = Quaternion.Euler(0, 0, 0);
 
     Vector2 playerMovementVector = Vector2.zero;
     Vector2 playerLookVector = Vector2.zero;
     Vector2 camVals = Vector2.zero;
 
     CharacterController controller;
+    Animator animator;
 
     bool sprinting;
+    bool crouching;
     float gravity = 0;
     float moveSpeed = 10;
 
@@ -28,7 +30,7 @@ public class PlayerController : MonoBehaviour {
     void FixedUpdate() {
         EnsureComponentsExist();
 
-        Vector3 movement = movementRotation * transform.forward * playerMovementVector.magnitude * moveSpeed * (sprinting ? 2 : 1);
+        Vector3 movement = movementRotation * transform.forward * playerMovementVector.magnitude * moveSpeed * (sprinting ? 2 : 1) * (crouching ? 0.5f : 1);
         movement -= Vector3.up * gravity;
 
         controller.Move(movement * Time.deltaTime);
@@ -41,22 +43,24 @@ public class PlayerController : MonoBehaviour {
         HandleRotation();
 
         if ( movement.magnitude > 0) { 
+            // Flips sprite based on left/right movement
             if (playerMovementVector.x > 0) {
-                slerp_point = Quaternion.Euler(0, -135, 0);
+                slerp_point = Quaternion.Euler(0, 0, 0);
             } else if (playerMovementVector.x < 0) {
-                slerp_point = Quaternion.Euler(0, 45, 0);
+                slerp_point = Quaternion.Euler(0, 180, 0);
             }
 
-            Quaternion rotation = Quaternion.Slerp(model.transform.localRotation, slerp_point, 16 * Time.deltaTime);
+            // Flips sprite based on forward/backward movement
+            animator.SetBool("show_back", playerMovementVector.y > 0);
+
+            Quaternion rotation = Quaternion.Slerp(model.transform.localRotation, slerp_point, 10 * Time.deltaTime);
 
             model.transform.localEulerAngles = new Vector3(
                 0, 
                 rotation.eulerAngles.y, 
                 0
             );
-        }
-
-        
+        }        
     }
 
     void HandleRotation() {
@@ -67,9 +71,7 @@ public class PlayerController : MonoBehaviour {
             look -= Camera.main.transform.forward * playerMovementVector.y;
             look -= Camera.main.transform.right * playerMovementVector.x;
 
-            Quaternion newRot = Quaternion.LookRotation(-look, transform.up);
-
-            movementRotation = Quaternion.Slerp(movementRotation, newRot, 16 * Time.deltaTime);
+            movementRotation = Quaternion.LookRotation(-look, transform.up);
             movementRotation = Quaternion.Euler(0, movementRotation.eulerAngles.y, 0);
         }
     }
@@ -87,12 +89,23 @@ public class PlayerController : MonoBehaviour {
     }
 
     void EnsureComponentsExist() {
-        if (!controller) {
-            controller = GetComponent<CharacterController>();
-        }
+        if (controller == null) { controller = GetComponent<CharacterController>(); }
+        if (animator == null) { animator = model.GetComponent<Animator>(); }
     }
 
     public void MovementAction(InputAction.CallbackContext obj) {
         playerMovementVector = obj.ReadValue<Vector2>();
+    }
+
+    public void SprintAction(InputAction.CallbackContext obj) {
+        sprinting = !obj.canceled;
+
+        if(!obj.canceled) { crouching = false; }
+    }
+
+    public void CrouchAction(InputAction.CallbackContext obj) {
+        crouching = !obj.canceled;
+
+        if(!obj.canceled) { sprinting = false; }
     }
 }

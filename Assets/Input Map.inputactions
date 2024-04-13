@@ -15,13 +15,22 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Look",
-                    "type": "Value",
-                    "id": "1ed990c3-7b34-4dbf-88f1-260b9e92be31",
-                    "expectedControlType": "Vector2",
-                    "processors": "ScaleVector2(x=0.01,y=0.01)",
+                    "name": "Crouch",
+                    "type": "Button",
+                    "id": "a57cc696-50ef-4eef-abbc-307efa0e03af",
+                    "expectedControlType": "Button",
+                    "processors": "",
                     "interactions": "",
-                    "initialStateCheck": true
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Sprint",
+                    "type": "Button",
+                    "id": "66e07c60-948a-43fd-86b2-64e66a57d354",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -93,23 +102,45 @@
                 },
                 {
                     "name": "",
-                    "id": "16a0003b-da55-48d0-8703-e785574d6cd2",
-                    "path": "<Mouse>/delta",
+                    "id": "d1fc9350-cbff-401c-b5ca-2e28f9a3442b",
+                    "path": "<Keyboard>/shift",
                     "interactions": "",
-                    "processors": "ScaleVector2(x=-1,y=-1)",
+                    "processors": "",
                     "groups": "",
-                    "action": "Look",
+                    "action": "Crouch",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "bda64841-0b89-4bf3-8b42-fb615a3da834",
-                    "path": "<Gamepad>/rightStick",
+                    "id": "bf89cf6c-8ceb-4971-aa75-40deb392a83b",
+                    "path": "<Gamepad>/leftTrigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Look",
+                    "action": "Crouch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b5d758ad-9706-4e87-b0aa-c74b9a4f1253",
+                    "path": "<Keyboard>/ctrl",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Sprint",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "28cb62bc-697b-49ce-8323-33050e592f56",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Sprint",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
