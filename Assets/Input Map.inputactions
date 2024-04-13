@@ -207,6 +207,65 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Menus",
+            "id": "11c1ca2f-5d45-4836-9075-70dfa7976b3f",
+            "actions": [
+                {
+                    "name": "CloseStart",
+                    "type": "Button",
+                    "id": "f49c3fa4-a997-4c52-a43f-aeb07f4e779c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Grimoire",
+                    "type": "Button",
+                    "id": "58822c69-eadf-4fb3-ad26-0859f88ffd35",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "71a75f32-1546-427a-bd90-33a96a3d95eb",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Grimoire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6103f7b6-e25d-4061-a0f2-88894cf331fe",
+                    "path": "<Keyboard>/anyKey",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CloseStart",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2d2f145f-97f7-48c7-9594-f774c8a035fe",
+                    "path": "<Mouse>/press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CloseStart",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []
