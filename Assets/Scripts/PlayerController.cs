@@ -43,12 +43,12 @@ public class PlayerController : MonoBehaviour {
         Vector3 movement = movementRotation * transform.forward * playerMovementVector.magnitude * moveSpeed * (sprinting ? 2 : 1) * (crouching ? 0.5f : 1);
         movement -= Vector3.up * gravity;
 
-        controller.Move(movement * Time.deltaTime);
+        controller.Move(movement * Time.fixedDeltaTime);
         if (controller.isGrounded) {
             gravity = 0;
         }
 
-        gravity += Time.deltaTime * 15;
+        gravity += Time.fixedDeltaTime * 15;
 
         HandleRotation();
         FixRotation();
@@ -65,7 +65,7 @@ public class PlayerController : MonoBehaviour {
             animator.SetBool("show_back", playerMovementVector.y > 0);
             renderer.flipX = playerMovementVector.y > 0;
 
-            Quaternion rotation = Quaternion.Slerp(model.transform.localRotation, slerpPoint, 10 * Time.deltaTime);
+            Quaternion rotation = Quaternion.Slerp(model.transform.localRotation, slerpPoint, 10 * Time.fixedDeltaTime);
 
             model.transform.localEulerAngles = new Vector3(
                 0,
