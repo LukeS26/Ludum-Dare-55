@@ -23,6 +23,9 @@ public class GameManager : MonoBehaviour
     // Integer Variables
     private int currPage, maxPage;
 
+    // Animator Variables
+    [SerializeField] private Animator grimoireAnimator;
+
     // BoxCollider2D Variables
 
     // SpriteRenderer Variables
@@ -79,6 +82,7 @@ public class GameManager : MonoBehaviour
         gameActive = false;
         CloseMenus();
         grimoire.SetActive(true);
+        grimoireAnimator.SetBool("Opened", true);
     }
 
     // Sets the Grimoire to the provided page
@@ -107,11 +111,17 @@ public class GameManager : MonoBehaviour
     // Called when any of the binds associated with PauseMenu in input are used
     public void OnPausePerformed(InputAction.CallbackContext context)
     {
+        // ensures button release doesn't call function
+        if(context.canceled) { return; }
+        
         // only opens the pause menu if the game is active
         if(grimoire.activeSelf)
         { 
-            CloseMenus();
+            /* grimoireAnimator.SetBool("Opened", false);
             gameActive = true;
+            yield return new WaitForSeconds(0.5f);
+            CloseMenus(); */
+            StartCoroutine(CloseGrimoire());
         }
         else if(gameStarted) { OpenGrimoire(); }
     }
@@ -203,5 +213,14 @@ public class GameManager : MonoBehaviour
     public void Quit()
     {
         Application.Quit();
+    }
+
+    // Closes the Grimoire
+    private IEnumerator CloseGrimoire()
+    {
+        grimoireAnimator.SetBool("Opened", false);
+        gameActive = true;
+        yield return new WaitForSeconds(0.5f);
+        CloseMenus();
     }
 }
