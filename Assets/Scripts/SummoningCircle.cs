@@ -9,6 +9,10 @@ public class SummoningCircle : MonoBehaviour {
     bool isStarted = false;
     Renderer renderer;
 
+    public int collectIndex = 0;
+
+    public Item[] items = new Item[5];
+
     void Update() {
         if(!isDrawn) {
             if (renderer == null) { renderer = GetComponent<Renderer>(); }
@@ -17,6 +21,7 @@ public class SummoningCircle : MonoBehaviour {
             if(drawCompletionPercent >= 1.0f) {
                 drawCompletionPercent = 1.0f;
                 isDrawn = true;
+                Activate();
             }
 
             renderer.material.SetFloat("_Percent", drawCompletionPercent);
@@ -26,36 +31,12 @@ public class SummoningCircle : MonoBehaviour {
     }
 
     public void Activate() {
-        if (!isDrawn || isStarted) { return; }
+        if (isStarted) { return; }
 
-        Collider[] possibleColliders = Physics.OverlapBox(transform.position, new Vector3(2.5f, 2.5f, 2.5f), Quaternion.identity, 1 << 8);
+        Collider[] possibleColliders = Physics.OverlapBox(transform.position, new Vector3(3f, 3f, 3f), Quaternion.identity, 1 << 8);
 
-        for (int i = 0; i < 5; i++) {
-            Transform curNode = transform.GetChild(i);
-
-            float closestDist = Mathf.Infinity;
-            int closestCollider = -1;
-
-            for (int j = 0; j < possibleColliders.Length; j++) {
-                Collider collider = possibleColliders[j];
-
-                if(collider == null) { continue; }
-
-                float dist = (collider.transform.position - curNode.position).sqrMagnitude;
-
-                if (dist < closestDist) {
-                    closestCollider = j;
-                    closestDist = dist;
-                }
-            }
-
-            if(closestCollider != -1) {
-                print(closestCollider);
-
-                possibleColliders[closestCollider].GetComponent<Item>().SetPoint(curNode);
-
-                possibleColliders[closestCollider] = null;
-            }
+        for (int i = 0; i < possibleColliders.Length; i++) {
+            possibleColliders[i].GetComponent<Rigidbody>().AddForce((possibleColliders[i].transform.position - transform.position).normalized * 3, ForceMode.Impulse);
         }
 
         isStarted = true;
