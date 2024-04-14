@@ -5522,7 +5522,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6985564332003714338, guid: 901fcf2abb78b3846a610ba0aa261cd8, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8747120220432507130, guid: 901fcf2abb78b3846a610ba0aa261cd8, type: 3}
       propertyPath: m_text
@@ -6107,6 +6107,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Materials Required
       objectReference: {fileID: 0}
+    - target: {fileID: 2609287296615459268, guid: 901fcf2abb78b3846a610ba0aa261cd8, type: 3}
+      propertyPath: m_text
+      value: 4 x Gem
+      objectReference: {fileID: 0}
     - target: {fileID: 4021856833439038328, guid: 901fcf2abb78b3846a610ba0aa261cd8, type: 3}
       propertyPath: m_text
       value: Summon
@@ -6206,7 +6210,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6985564332003714338, guid: 901fcf2abb78b3846a610ba0aa261cd8, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8747120220432507130, guid: 901fcf2abb78b3846a610ba0aa261cd8, type: 3}
       propertyPath: m_text
