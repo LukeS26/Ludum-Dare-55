@@ -1,10 +1,13 @@
 using UnityEngine.Audio;
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AudioManager : MonoBehaviour
 {
     public Sound[] sounds;
+
+    [SerializeField] private Slider musicVol, sfxVol;
 
     //public static AudioManager instance; // Uncomment if working with multiple scenes
 

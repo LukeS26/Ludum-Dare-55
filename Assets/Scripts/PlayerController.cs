@@ -32,7 +32,12 @@ public class PlayerController : MonoBehaviour {
 
     void Awake() {
         EnsureComponentsExist();
-        lastGroundedElevation = transform.position.y;
+    }
+
+    private void Start() {
+        cameraGimbal = Vector3.up * (transform.position.y + 0.75f);
+        Camera.main.transform.position = transform.position + cameraGimbal;
+
     }
 
     void Update() {
@@ -133,7 +138,7 @@ public class PlayerController : MonoBehaviour {
 
         float lerpY = Mathf.Min(Mathf.Lerp(cameraGimbal.y, depth + 0.75f, 3f * Time.deltaTime), transform.position.y);
         cameraGimbal = new Vector3(cameraGimbal.x, lerpY, cameraGimbal.z);
-        cameraGimbal = Vector3.Lerp(cameraGimbal, hGimbal + Vector3.up * cameraGimbal.y, 1f * Time.deltaTime);
+        cameraGimbal = Vector3.Lerp(cameraGimbal, hGimbal + Vector3.up * cameraGimbal.y, 3f * Time.deltaTime);
     }
 
     void HandleRotation() {
