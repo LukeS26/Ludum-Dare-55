@@ -30,6 +30,8 @@ public class PlayerController : MonoBehaviour {
     float gravity = 0;
     float lastGroundedElevation;
 
+    public bool isInvincible;
+
     void Awake() {
         EnsureComponentsExist();
     }
