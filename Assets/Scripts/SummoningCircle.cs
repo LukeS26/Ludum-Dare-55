@@ -6,6 +6,7 @@ public class SummoningCircle : MonoBehaviour {
     float drawCompletionPercent = 0;
     float drawSpeed = 0.5f;
     bool isDrawn = false;
+    bool isStarted = false;
     Renderer renderer;
 
     void Update() {
@@ -19,12 +20,14 @@ public class SummoningCircle : MonoBehaviour {
             }
 
             renderer.material.SetFloat("_Percent", drawCompletionPercent);
+        } else {
+
         }
     }
 
     public void Activate() {
-        if (!isDrawn) { return; }
-        
+        if (!isDrawn || isStarted) { return; }
+
         Collider[] possibleColliders = Physics.OverlapBox(transform.position, new Vector3(2.5f, 2.5f, 2.5f), Quaternion.identity, 1 << 8);
 
         for (int i = 0; i < 5; i++) {
@@ -54,5 +57,7 @@ public class SummoningCircle : MonoBehaviour {
                 possibleColliders[closestCollider] = null;
             }
         }
+
+        isStarted = true;
     }
 }
