@@ -5,23 +5,29 @@ using UnityEngine;
 public class Item : MonoBehaviour {
     Transform target;
     Vector3 initialPoint;
-    float slerpTime = 0;
+
+    float slerpPercent = 0;
+    float slerpTime = 0.5f;
 
     void Update() {
         transform.rotation = Camera.main.transform.rotation;
-    }
+        if (target) {
+            slerpPercent += Time.deltaTime * (1 / slerpTime);
 
-    void FixedUpdate() {
-        if(target) {
-            slerpTime += Time.deltaTime;
-            transform.position = Vector3.Slerp(initialPoint, target.position, slerpTime);
+            transform.position = Vector3.Slerp(initialPoint, target.position, slerpPercent);
         }
     }
 
-    public void SetPoint(Transform point) {
-        GetComponent<Rigidbody>().isKinematic = true;
+    public void DropPickup() {
+        GetComponent<Rigidbody>().isKinematic = false;
+        target = null;
+        slerpPercent = 0;
+    }
 
-        initialPoint = transform.position;
+
+    public void SetPoint(Transform point) {
         target = point;
+        initialPoint = transform.position;
+        GetComponent<Rigidbody>().isKinematic = true;
     }
 }
