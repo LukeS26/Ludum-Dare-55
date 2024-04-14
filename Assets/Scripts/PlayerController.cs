@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour {
     Vector2 playerMovementVector = Vector2.zero;
     Vector2 playerLookVector = Vector2.zero;
     Vector2 camVals = Vector2.zero;
+    Vector3 cameraGimbal = Vector3.zero;
 
     CharacterController controller;
     Animator animator;
@@ -27,6 +28,7 @@ public class PlayerController : MonoBehaviour {
     bool sprinting;
     bool crouching;
     float gravity = 0;
+    float lastGroundedElevation = 0f;
 
     void Awake() {
         EnsureComponentsExist();
@@ -35,7 +37,9 @@ public class PlayerController : MonoBehaviour {
     void Update() {
         EnsureComponentsExist();
 
+        Camera.main.transform.parent = null;
         CameraControl();
+        SetCameraGimbal();
         FixRotation();
     }
 
@@ -57,7 +61,7 @@ public class PlayerController : MonoBehaviour {
         gravity += Time.fixedDeltaTime * gravForce;
 
         HandleRotation();
-        FixRotation();
+        //FixRotation();
 
         if ( playerMovementVector.magnitude > 0) { 
             // Flips sprite based on left/right movement
@@ -90,7 +94,7 @@ public class PlayerController : MonoBehaviour {
         camVals.x %= 2 * Mathf.PI;
         
         camVals.y += playerLookVector.y;
-        camVals.y = Mathf.Clamp(camVals.y, 0f, 2f);
+        camVals.y = Mathf.Clamp(camVals.y, 0f, 1.5f);
     }
 
     void FixRotation() {
@@ -100,17 +104,35 @@ public class PlayerController : MonoBehaviour {
         cameraPos.z = Mathf.Sin(camVals.x) * 1.5f;
         cameraPos.y = camVals.y;
 
-        Camera.main.transform.localPosition = (cameraPos * (2.5f + (0.5f * cameraPos.y * cameraPos.y) ));
+        Vector3 lookPos = Vector3.ProjectOnPlane(transform.position + cameraGimbal, Vector3.up) + Vector3.up * cameraGimbal.y;
+        Camera.main.transform.position = lookPos + (cameraPos * (2.5f + (0.5f * cameraPos.y * cameraPos.y)));
 
-        Vector3 lookPos = new Vector3(0, 1, 0) - Camera.main.transform.localPosition;
-
-        Camera.main.transform.rotation = Quaternion.LookRotation(lookPos, transform.up);
+        Vector3 lookDir = lookPos - Camera.main.transform.position;
+        Camera.main.transform.rotation = Quaternion.LookRotation(lookDir, transform.up);
 
         model.transform.parent.localEulerAngles = new Vector3(
             0, 
             Camera.main.transform.rotation.eulerAngles.y, 
             0
         );
+    }
+
+    void SetCameraGimbal()
+    {
+        float length = 0.5f;
+        if (sprinting) length = 1.5f;
+        if (crouching) length = 3f;
+
+        Vector3 hGimbal = new Vector3(playerMovementVector.x, 0f, playerMovementVector.y).normalized;
+        hGimbal = movementRotation * transform.forward * length;
+
+        if (controller.isGrounded) lastGroundedElevation = transform.position.y;
+        float depth = Mathf.Min(transform.position.y, lastGroundedElevation) + 0.75f;
+        if (Mathf.Abs(transform.position.y - lastGroundedElevation) > 7.5f) depth = transform.position.y + 0.75f;
+
+        float lerpY = Mathf.Min(Mathf.Lerp(cameraGimbal.y, depth, 3f * Time.deltaTime), transform.position.y + 0.75f);
+        cameraGimbal = new Vector3(cameraGimbal.x, lerpY, cameraGimbal.z);
+        cameraGimbal = Vector3.Lerp(cameraGimbal, hGimbal + Vector3.up * cameraGimbal.y, 1f * Time.deltaTime);
     }
 
     void HandleRotation() {
