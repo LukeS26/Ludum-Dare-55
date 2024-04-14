@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8431998353635484767}
   - component: {fileID: 8026247943112786135}
   - component: {fileID: 7957505310730309797}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Meat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a5f205109775d293b6b4e82186dfbf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 6
 --- !u!54 &8026247943112786135
 Rigidbody:
   m_ObjectHideFlags: 0

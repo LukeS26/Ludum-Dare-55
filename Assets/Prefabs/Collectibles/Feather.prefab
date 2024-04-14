@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5349305227997175315}
   - component: {fileID: 5413381571985216834}
   - component: {fileID: 1236181949842788638}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Feather
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a5f205109775d293b6b4e82186dfbf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 3
 --- !u!54 &5413381571985216834
 Rigidbody:
   m_ObjectHideFlags: 0

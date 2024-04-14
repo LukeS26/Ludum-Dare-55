@@ -19,6 +19,10 @@ public class SummoningCircle : MonoBehaviour {
         return items[index] == null;
     }
 
+    public void RemoveChild(int index) {
+        items[index] = null;
+    }
+
     void Update() {
         if(!isDrawn) {
             if (circleRenderer == null) { circleRenderer = transform.GetChild(0).GetComponent<Renderer>(); }
@@ -54,7 +58,31 @@ public class SummoningCircle : MonoBehaviour {
     }
 
     public void Activate() {
-        int index = 0;
-        Instantiate(summons[index], transform);
+        print("ACTIVATE");
+
+        for (int i = 0; i < summons.Length; i++) {
+            if(!summons[i].GetComponent<Summon>().CheckRecipe(items)) { continue; }
+
+            GameObject summon = Instantiate(summons[i], transform);
+
+            summon.transform.localPosition = new Vector3(0, 0, -2);
+
+            for(int j = 0; j < 4; j++) {
+                if(items[j] == null) { continue; }
+                Destroy(items[j].gameObject);
+                items[j] = null;
+            }
+
+            return;
+        }
+
+        //Failed recipe
+
+        foreach (Item item in items) {
+            if(item == null) { continue; }
+            item.transform.parent = null;
+        }
+
+        Destroy(gameObject);
     }
 }

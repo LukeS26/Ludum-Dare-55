@@ -3,31 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Item : MonoBehaviour {
-    Transform target;
     Vector3 initialPoint;
 
-    float slerpPercent = 0;
-    float slerpTime = 0.5f;
+    public int id;
 
     void Update() {
         transform.rotation = Camera.main.transform.rotation;
-        if (target) {
-            slerpPercent += Time.deltaTime * (1 / slerpTime);
+    }
 
-            transform.position = Vector3.Slerp(initialPoint, target.position, slerpPercent);
+    public void PickedUp() {
+        if(transform.parent == null) { return; }
+
+        for(int i = 0; i < 4; i++) {
+            if(transform.parent.parent.GetChild(i).childCount > 0) {
+                if(transform.parent.parent.GetChild(i).GetChild(0) == transform) {
+                    transform.parent.parent.parent.GetComponent<SummoningCircle>().RemoveChild(i);
+                    return;
+                }
+            }
+
         }
     }
 
     public void DropPickup() {
         GetComponent<Rigidbody>().isKinematic = false;
-        target = null;
-        slerpPercent = 0;
-    }
-
-
-    public void SetPoint(Transform point) {
-        target = point;
-        initialPoint = transform.position;
-        GetComponent<Rigidbody>().isKinematic = true;
     }
 }

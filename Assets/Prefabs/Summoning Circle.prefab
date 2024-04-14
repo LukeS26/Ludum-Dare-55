@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 2525466099635550036}
   - component: {fileID: 2493025484308773288}
   - component: {fileID: -6595908207940693359}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: Summoning Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -145,9 +145,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f715b82d8a250b4c185e2b87e549844b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  summons:
+  - {fileID: 1680076543298331130, guid: 4548c30cc2c4289e193033876a5cc6ea, type: 3}
   collectIndex: 0
   items:
-  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}

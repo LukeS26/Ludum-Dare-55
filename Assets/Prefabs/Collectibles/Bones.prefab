@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2217841973053514324}
   - component: {fileID: 7706512775356935123}
   - component: {fileID: 8401325720758096191}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bones
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a5f205109775d293b6b4e82186dfbf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 2
 --- !u!54 &7706512775356935123
 Rigidbody:
   m_ObjectHideFlags: 0

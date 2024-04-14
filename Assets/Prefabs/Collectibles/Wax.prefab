@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8011279531501722696}
   - component: {fileID: 8633383114387496916}
   - component: {fileID: 8035263688473528996}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wax
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a5f205109775d293b6b4e82186dfbf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 8
 --- !u!54 &8633383114387496916
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -195,7 +195,7 @@ public class PlayerController : MonoBehaviour {
         if(!controller.isGrounded) { return; }
 
         RaycastHit hit;
-        if(Physics.Raycast(transform.position + Vector3.up, -Vector3.up, out hit, Mathf.Infinity, 1 << 9, QueryTriggerInteraction.Ignore)) {
+        if(Physics.Raycast(transform.position + Vector3.up, -Vector3.up, out hit, Mathf.Infinity, 1 << 9, QueryTriggerInteraction.Collide)) {
             Instantiate(summoningCirclePrefab, hit.point + Vector3.up * 0.01f, Quaternion.Euler(90, 0, 0), hit.transform);
         }
     }
@@ -203,7 +203,7 @@ public class PlayerController : MonoBehaviour {
     public void InteractAction(InputAction.CallbackContext obj) {
         if(!obj.performed) { return; }
 
-        Collider[] nearbyInteractables = Physics.OverlapSphere(transform.position, 1, 1 << 10 | 1 << 8, QueryTriggerInteraction.Collide);
+        Collider[] nearbyInteractables = Physics.OverlapSphere(transform.position, 1, 1 << 11 | 1 << 8, QueryTriggerInteraction.Collide);
         
         float closestDist = Mathf.Infinity;
         Collider closestCollider = null;
@@ -223,8 +223,10 @@ public class PlayerController : MonoBehaviour {
         SummoningCircle circle = closestCollider.GetComponent<SummoningCircle>();
 
         if(item) {
-            inventory.PickupItem(item);
-            item.transform.parent = transform.GetChild(1);
+            if(inventory.PickupItem(item) > -1) {
+                item.PickedUp();
+                item.transform.parent = transform.GetChild(1);
+            }
         }
 
         if(circle) {
@@ -240,7 +242,7 @@ public class PlayerController : MonoBehaviour {
         if(!droppedItem) { return; }
         
         // Calc distance to nearest summoning circle
-        Collider[] summoningCircles = Physics.OverlapSphere(transform.position, 1, 1 << 10, QueryTriggerInteraction.Collide);
+        Collider[] summoningCircles = Physics.OverlapSphere(transform.position, 1, 1 << 11, QueryTriggerInteraction.Collide);
         
         float closestDist = Mathf.Infinity;
         Transform closestNode = null;
