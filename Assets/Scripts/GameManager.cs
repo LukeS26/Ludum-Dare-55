@@ -112,16 +112,14 @@ public class GameManager : MonoBehaviour
     public void OnPausePerformed(InputAction.CallbackContext context)
     {
         // ensures button release doesn't call function
-        if(context.canceled) { return; }
+        if(!context.performed) { return; }
         
         // only opens the pause menu if the game is active
-        if(grimoire.activeSelf)
+        if(grimoire.activeSelf) 
         { 
-            /* grimoireAnimator.SetBool("Opened", false);
+            grimoireAnimator.SetBool("Opened", false);
             gameActive = true;
-            yield return new WaitForSeconds(0.5f);
-            CloseMenus(); */
-            StartCoroutine(CloseGrimoire());
+            StartCoroutine(CloseGrimoire()); 
         }
         else if(gameStarted) { OpenGrimoire(); }
     }
@@ -218,8 +216,6 @@ public class GameManager : MonoBehaviour
     // Closes the Grimoire
     private IEnumerator CloseGrimoire()
     {
-        grimoireAnimator.SetBool("Opened", false);
-        gameActive = true;
         yield return new WaitForSeconds(0.5f);
         CloseMenus();
     }
