@@ -67,6 +67,8 @@ public class SummoningCircle : MonoBehaviour {
 
             summon.transform.localPosition = new Vector3(0, 0, -2);
 
+            gameObject.layer = 0;
+            
             for(int j = 0; j < 4; j++) {
                 if(items[j] == null) { continue; }
                 Destroy(items[j].gameObject);
