@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour {
     public float walkSpeed = 10, sprintSpeed = 20, crouchSpeed = 5, jumpHeight = 1.5f, gravForce = 19.6f;
 
     public GameObject model;
+    public GameObject summoningCirclePrefab;
 
     Quaternion movementRotation;
     Quaternion slerpPoint = Quaternion.Euler(0, 0, 0);
@@ -21,11 +22,11 @@ public class PlayerController : MonoBehaviour {
     Animator animator;
     SpriteRenderer renderer;
 
+    Inventory inventory;
+
     bool sprinting;
     bool crouching;
     float gravity = 0;
-
-    GameObject[] inventory = new GameObject[3];
 
     void Awake() {
         EnsureComponentsExist();
@@ -101,11 +102,9 @@ public class PlayerController : MonoBehaviour {
 
         Camera.main.transform.localPosition = (cameraPos * (2.5f + (0.5f * cameraPos.y * cameraPos.y) ));
 
-        Vector3 lookPos = new Vector3(0, 2, 0) - Camera.main.transform.localPosition;
-        Vector3 lookOffset = Vector3.up * 0.75f;
+        Vector3 lookPos = new Vector3(0, 1, 0) - Camera.main.transform.localPosition;
 
         Camera.main.transform.rotation = Quaternion.LookRotation(lookPos, transform.up);
-        Camera.main.transform.forward = (transform.position + lookOffset) - Camera.main.transform.position;
 
         model.transform.parent.localEulerAngles = new Vector3(
             0, 
@@ -131,6 +130,7 @@ public class PlayerController : MonoBehaviour {
         if (controller == null) { controller = GetComponent<CharacterController>(); }
         if (animator == null) { animator = model.GetComponent<Animator>(); }
         if (renderer == null) { renderer = model.GetComponent<SpriteRenderer>(); }
+        if (inventory == null) { inventory = GetComponent<Inventory>(); }
     }
 
     public void MovementAction(InputAction.CallbackContext obj) {
@@ -147,11 +147,11 @@ public class PlayerController : MonoBehaviour {
         if(obj.performed) { crouching = false; }
     }
 
-    public void CrouchAction(InputAction.CallbackContext obj) {
-        crouching = obj.performed;
+    // public void CrouchAction(InputAction.CallbackContext obj) {
+    //     crouching = obj.performed;
 
-        if(obj.performed) { sprinting = false; }
-    }
+    //     if(obj.performed) { sprinting = false; }
+    // }
 
     public void JumpAction(InputAction.CallbackContext obj) {
         if (!obj.performed) { return; }
@@ -160,7 +160,84 @@ public class PlayerController : MonoBehaviour {
     }
 
     public void DrawAction(InputAction.CallbackContext obj) {
+        if(!obj.performed) { return; }
+        if(!controller.isGrounded) { return; }
 
+        RaycastHit hit;
+        if(Physics.Raycast(transform.position + Vector3.up, -Vector3.up, out hit, Mathf.Infinity, 1 << 9, QueryTriggerInteraction.Ignore)) {
+            Instantiate(summoningCirclePrefab, hit.point + Vector3.up * 0.01f, Quaternion.Euler(90, 0, 0), hit.transform);
+        }
+    }
+
+    public void InteractAction(InputAction.CallbackContext obj) {
+        if(!obj.performed) { return; }
+
+        Collider[] nearbyInteractables = Physics.OverlapSphere(transform.position, 1, 1 << 10 | 1 << 8, QueryTriggerInteraction.Collide);
+        
+        float closestDist = Mathf.Infinity;
+        Collider closestCollider = null;
+
+        for (int i = 0; i < nearbyInteractables.Length; i++) {
+            float dist = (nearbyInteractables[i].transform.position - transform.position).magnitude;
+
+            if(dist < closestDist) {
+                closestDist = dist;
+                closestCollider = nearbyInteractables[i];
+            }
+        }
+
+        if (!closestCollider) { return; }
+
+        Item item = closestCollider.GetComponent<Item>();
+        SummoningCircle circle = closestCollider.GetComponent<SummoningCircle>();
+
+        if(item) {
+            inventory.PickupItem(item);
+            item.transform.parent = transform.GetChild(2);
+        }
+
+        if(circle) {
+            circle.Activate();
+        }
+    }
+
+    public void DropAction(InputAction.CallbackContext obj) {
+        if(!obj.performed) { return; }
+
+        Item droppedItem = inventory.DropItem();
+
+        if(!droppedItem) { return; }
+        
+        // Calc distance to nearest summoning circle
+        Collider[] summoningCircles = Physics.OverlapSphere(transform.position, 1, 1 << 10, QueryTriggerInteraction.Collide);
+        
+        float closestDist = Mathf.Infinity;
+        Transform closestNode = null;
+        int index = -1;
+
+        for (int i = 0; i < summoningCircles.Length; i++) {
+            for (int j = 0; j < 4; j++) {
+                float dist = (summoningCircles[i].transform.GetChild(2).GetChild(j).position - transform.position).magnitude;
+
+                if(dist < closestDist && summoningCircles[i].GetComponent<SummoningCircle>().SpotFree(j)) {
+                    index = j;
+                    closestDist = dist;
+                    closestNode = summoningCircles[i].transform.GetChild(2).GetChild(j);
+                }
+            }
+        }
+
+        if(closestNode != null) {
+            droppedItem.transform.parent = closestNode;
+
+            closestNode.parent.parent.GetComponent<SummoningCircle>().FillSpot(index, droppedItem);
+
+            droppedItem.transform.localPosition = new Vector3(0, 0, -1);
+
+            droppedItem.GetComponent<Rigidbody>().isKinematic = true;
+        } else {
+            droppedItem.transform.parent = null;
+        }
     }
 
     private void OnTriggerStay(Collider other)
