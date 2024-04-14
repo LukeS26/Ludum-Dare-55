@@ -43,12 +43,12 @@ public class PlayerController : MonoBehaviour {
         Vector3 movement = movementRotation * transform.forward * playerMovementVector.magnitude * moveSpeed * (sprinting ? 2 : 1) * (crouching ? 0.5f : 1);
         movement -= Vector3.up * gravity;
 
-        controller.Move(movement * Time.deltaTime);
+        controller.Move(movement * Time.fixedDeltaTime);
         if (controller.isGrounded) {
             gravity = 0;
         }
 
-        gravity += Time.deltaTime * 15;
+        gravity += Time.fixedDeltaTime * 15;
 
         HandleRotation();
         FixRotation();
@@ -64,15 +64,15 @@ public class PlayerController : MonoBehaviour {
             // Flips sprite based on forward/backward movement
             animator.SetBool("show_back", playerMovementVector.y > 0);
             renderer.flipX = playerMovementVector.y > 0;
+        }
 
-            Quaternion rotation = Quaternion.Slerp(model.transform.localRotation, slerpPoint, 10 * Time.deltaTime);
+        Quaternion rotation = Quaternion.Slerp(model.transform.localRotation, slerpPoint, 10 * Time.deltaTime);
 
-            model.transform.localEulerAngles = new Vector3(
-                0,
-                rotation.eulerAngles.y, 
-                0
-            );
-        }        
+        model.transform.localEulerAngles = new Vector3(
+            0,
+            rotation.eulerAngles.y, 
+            0
+        );
 
         animator.SetBool("crouching", crouching);
         animator.SetBool("sprinting", sprinting);
@@ -80,10 +80,10 @@ public class PlayerController : MonoBehaviour {
     }
 
     void CameraControl() {
-        camVals.x += playerLookVector.x * Time.deltaTime;
+        camVals.x += playerLookVector.x;
         camVals.x %= 2 * Mathf.PI;
         
-        camVals.y += playerLookVector.y * Time.deltaTime;
+        camVals.y += playerLookVector.y;
 
         if(camVals.y > 2f) { camVals.y = 2f; }
         if(camVals.y < 0f) { camVals.y = 0f; }
@@ -98,7 +98,6 @@ public class PlayerController : MonoBehaviour {
 
         Camera.main.transform.localPosition = (cameraPos * (2.5f + (0.5f * cameraPos.y * cameraPos.y) ));
 
-        Vector3 offset = Camera.main.transform.right;
         Vector3 lookPos = new Vector3(0, 2, 0) - Camera.main.transform.localPosition;
 
         Camera.main.transform.rotation = Quaternion.LookRotation(lookPos, transform.up);
