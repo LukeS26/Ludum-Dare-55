@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     public static bool gameActive, gameStarted;
 
     // Integer Variables
-    private int currPage;
+    private int currPage, maxPage;
 
     // BoxCollider2D Variables
 
@@ -31,14 +31,13 @@ public class GameManager : MonoBehaviour
     // Image Variables
 
     // Script Variables
-    /* private InputMap input; */
 
     #endregion
 
     // Called when the game is loaded
     private void Awake()
     {
-        /* input = new InputMap(); */
+        
     }
     
     // Start is called before the first frame update
@@ -48,6 +47,7 @@ public class GameManager : MonoBehaviour
         gameStarted = false;
 
         currPage = 0;
+        maxPage = 2;
         
         DeactivatePages();
         SetToPage(currPage);
@@ -130,7 +130,8 @@ public class GameManager : MonoBehaviour
     public void OnFlipForwardPerformed(InputAction.CallbackContext context)
     {
         // ensures Grimoire is open first
-        if((grimoire.activeSelf) && (currPage + 1 < grimoire.transform.childCount))
+        if((context.performed) && (grimoire.activeSelf) && (currPage < maxPage)
+            && (currPage + 1 < grimoire.transform.childCount))
         { SetToPage(++currPage); }
     }
 
@@ -138,12 +139,57 @@ public class GameManager : MonoBehaviour
     public void OnFlipBackwardPerformed(InputAction.CallbackContext context)
     {
         // ensures Grimoire is open first
-        if((grimoire.activeSelf) && (currPage - 1 >= 0))
+        if((context.performed) && (grimoire.activeSelf) 
+            && (currPage - 1 >= 0))
         { SetToPage(--currPage); }
     }
 
     #endregion
 
+    #region Add Summons
+
+    // Adds Face Heap to the Grimoire
+    private void AddFaceHeap()
+    {
+        GameObject page = grimoire.transform.GetChild(3).gameObject;
+        page.transform.GetChild(0).gameObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text += "\nψ F̴̻̠̙̃͐̿̄̈a̴̡̰͚͒̓̾̀͜c̵̡͐ȩ̶̡̛̮͈̭͒̐̇͠ ̸̺̓Ȟ̶̦̻̜̝ͅè̸̞̼̠̏̿̋̚ͅa̶̧̤͙̞̐p̶̯̌ ⛥";
+        page.transform.GetChild(1).gameObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text += "\n...4";
+    }
+
+    // Adds Archangel to the Grimoire
+    private void AddArchangel()
+    {
+        GameObject page = grimoire.transform.GetChild(4).gameObject;
+        page.transform.GetChild(0).gameObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text += "\n⛧ Ä̴̡̞̪̖͖́͊͝r̵̛͍̜̐̉̔c̵̢̤̜͈̏ĥ̸̡̝͗͒͌ā̷͉͙̪̹͒͜n̴̡̛̖̠̐͘̕g̴̡̨̖͎̩͊̿͝ȅ̴̱͖̿͠l̶̲̺̈̃͗ ⛧";
+        page.transform.GetChild(1).gameObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text += "\n...5";
+    }
+
+    // Adds Ice Monster to the Grimoire
+    private void AddIceMonster()
+    {
+        GameObject page = grimoire.transform.GetChild(5).gameObject;
+        page.transform.GetChild(0).gameObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text += "\n☠ Ī̴̼̙̫̪̺̀̊̚͘c̷̡̛̜̼̼̿e̵̺̻̝͇̅̀̈́ ̵̥̭͍͘M̶̞̺̯̽o̶̿̅̅͜n̷̡̙͍͚̳̊͂̓ş̸̝̻͔̘̅̐̏͠t̵̢͓̱͉͑ě̷̺͚̇̑̕r̷͓̻̲̖͐̌̂͠͝ ☠";
+        page.transform.GetChild(1).gameObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text += "\n...6";
+    }
+
+    // Adds Sumdoo to the Grimoire
+    private void AddSumdo()
+    {
+        GameObject page = grimoire.transform.GetChild(6).gameObject;
+        page.transform.GetChild(0).gameObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text += "\n⛧ Ş̸̼̜̗͊̂̐̃̕u̶̧͖̠̭͌̐͌̕̚m̶͍͓̊d̵̡̻̫̃̾̿͜o̵͕͇̓̓̂̏͜o̷̺͍̒̒̎̀̓ ⛥";
+        page.transform.GetChild(1).gameObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text += "\n...7";
+    }
+
+    // Adds Crying Sun to the Grimoire
+    private void AddCryingSun()
+    {
+        GameObject page = grimoire.transform.GetChild(7).gameObject;
+        page.transform.GetChild(0).gameObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text += "\n☠ C̵͎̫͌̈́̈́̄̚r̷̡͍̫͆̀̋y̴̲̱̺̗̭͑́͝i̴͙͎̞͇̟̍n̶̡̗̻̞͍̋̒̎̕g̵̠̮͔̜̹̍̓̑ ̵̩̦̤̥͌S̸̩̹͙̲͌u̶͜͝ń̷̰̺̟̭͇̎̂́ ψ";
+        page.transform.GetChild(1).gameObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text += "\n...8";
+    }
+
+    #endregion
+    
     // Causes the game to close
     public void Quit()
     {

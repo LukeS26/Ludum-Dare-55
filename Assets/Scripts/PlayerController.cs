@@ -67,7 +67,7 @@ public class PlayerController : MonoBehaviour {
             renderer.flipX = playerMovementVector.y > 0;
         }
 
-        Quaternion rotation = Quaternion.Slerp(model.transform.localRotation, slerpPoint, 10 * Time.deltaTime);
+            Quaternion rotation = Quaternion.Slerp(model.transform.localRotation, slerpPoint, 10 * Time.deltaTime);
 
         model.transform.localEulerAngles = new Vector3(
             0,
