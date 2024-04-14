@@ -221,7 +221,7 @@ public class PlayerController : MonoBehaviour {
 
         if(item) {
             inventory.PickupItem(item);
-            item.transform.parent = transform.GetChild(2);
+            item.transform.parent = transform.GetChild(1);
         }
 
         if(circle) {
