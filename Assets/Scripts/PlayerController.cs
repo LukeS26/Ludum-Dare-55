@@ -6,7 +6,8 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Interactions;
 
 public class PlayerController : MonoBehaviour {
-    public float walkSpeed = 10, sprintSpeed = 20, crouchSpeed = 5, jumpHeight = 1.5f, gravForce = 19.6f;
+    public float walkSpeed = 10, sprintSpeed = 20, crouchSpeed = 5, climbSpeed = 2.5f, jumpHeight = 1.5f, gravForce = 19.6f;
+    public LayerMask groundMask;
 
     public GameObject model;
     public GameObject summoningCirclePrefab;
@@ -25,8 +26,7 @@ public class PlayerController : MonoBehaviour {
 
     Inventory inventory;
 
-    bool sprinting;
-    bool crouching;
+    bool sprinting, crouching, climbing; 
     float gravity = 0;
     float lastGroundedElevation;
 
@@ -68,21 +68,21 @@ public class PlayerController : MonoBehaviour {
 
         HandleRotation();
         //FixRotation();
-
-        if ( playerMovementVector.magnitude > 0) { 
-            // Flips sprite based on left/right movement
-            if (playerMovementVector.x > 0) {
-                slerpPoint = Quaternion.Euler(0, 0, 0);
-            } else if (playerMovementVector.x < 0) {
-                slerpPoint = Quaternion.Euler(0, 180, 0);
-            }
-
+        
+        // Flips sprite based on left/right movement
+        if (playerMovementVector.x > 0) {
+            slerpPoint = Quaternion.Euler(0, 0, 0);
+        } else if (playerMovementVector.x < 0) {
+            slerpPoint = Quaternion.Euler(0, 180, 0);
+        }
+        if (playerMovementVector.y != 0)
+        {
             // Flips sprite based on forward/backward movement
             animator.SetBool("show_back", playerMovementVector.y > 0);
             renderer.flipX = playerMovementVector.y > 0;
         }
 
-            Quaternion rotation = Quaternion.Slerp(model.transform.localRotation, slerpPoint, 10 * Time.deltaTime);
+        Quaternion rotation = Quaternion.Slerp(model.transform.localRotation, slerpPoint, 10 * Time.deltaTime);
 
         model.transform.localEulerAngles = new Vector3(
             0,
@@ -182,8 +182,11 @@ public class PlayerController : MonoBehaviour {
     // }
 
     public void JumpAction(InputAction.CallbackContext obj) {
+        RaycastHit hit;
+        Physics.Raycast(transform.position + controller.center, Vector3.down, out hit, controller.height / 2f + 0.75f, groundMask, QueryTriggerInteraction.Ignore);
+        Debug.Log(hit.collider != null);
         if (!obj.performed) { return; }
-        if (!controller.isGrounded) { return; }
+        if (!controller.isGrounded && hit.collider == null) { return; }
         gravity = -Mathf.Sqrt(2f * gravForce * jumpHeight);
     }
 
@@ -278,6 +281,7 @@ public class PlayerController : MonoBehaviour {
 
     public void Climb()
     {
-        
+        gravity = -climbSpeed;
+        lastGroundedElevation = transform.position.y;
     }
 }
