@@ -22,7 +22,8 @@ public class IslandProp : MonoBehaviour
         if (island == null)
         {
             //Debug.Log(name + " -- Found Island");
-            other.transform.TryGetComponent(out island);
+            bool tryR = other.transform.TryGetComponent(out island);
+            if (!tryR) return;
             island.AddProp(this);
             transform.parent = island.transform;
         }
