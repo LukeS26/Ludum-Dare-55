@@ -147,6 +147,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   summons:
   - {fileID: 1680076543298331130, guid: 4548c30cc2c4289e193033876a5cc6ea, type: 3}
+  - {fileID: 1680076543298331130, guid: 585bb35b60ffda447a9db1f071c8f0ed, type: 3}
+  - {fileID: 1680076543298331130, guid: 413435a7fe6236b5684d16d19c1c6aad, type: 3}
+  - {fileID: 1680076543298331130, guid: f08ad0f029fa64678b85a0b68572cbe1, type: 3}
+  - {fileID: 1680076543298331130, guid: 5a2d59dad92ddfb4f8e68e77fd8c3e26, type: 3}
+  - {fileID: 1680076543298331130, guid: 572b8ecdcfd774b6bb3abc9e3f4411f7, type: 3}
   collectIndex: 0
   items:
   - {fileID: 0}
