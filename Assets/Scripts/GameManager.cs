@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
         gameActive = false;
         gameStarted = false;
 
-        currPage = 0;
+        currPage = 1;
         maxPage = 2;
         
         DeactivatePages();
@@ -122,7 +122,7 @@ public class GameManager : MonoBehaviour
         // only opens the level selection menu if the start menu is active
         if(startScreen.activeSelf) 
         { 
-            CloseMenus();
+            OpenGrimoire();
             gameStarted = true;
         }
     }
