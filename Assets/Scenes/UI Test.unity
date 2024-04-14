@@ -242,6 +242,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5268663418468134723, guid: 901fcf2abb78b3846a610ba0aa261cd8, type: 3}
   m_PrefabInstance: {fileID: 125948769}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &211632055 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8747120220432507130, guid: 901fcf2abb78b3846a610ba0aa261cd8, type: 3}
+  m_PrefabInstance: {fileID: 1038160198}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &217400191
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -666,6 +677,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5268663418468134723, guid: 901fcf2abb78b3846a610ba0aa261cd8, type: 3}
   m_PrefabInstance: {fileID: 783232830}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &819315334 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2609287296615459268, guid: 901fcf2abb78b3846a610ba0aa261cd8, type: 3}
+  m_PrefabInstance: {fileID: 1038160198}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1038160198
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -787,7 +809,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6985564332003714338, guid: 901fcf2abb78b3846a610ba0aa261cd8, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8747120220432507130, guid: 901fcf2abb78b3846a610ba0aa261cd8, type: 3}
       propertyPath: m_text
@@ -1244,6 +1266,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startScreen: {fileID: 720379808}
   grimoire: {fileID: 1253480188}
+  tableOfContents: {fileID: 819315334}
+  pageNums: {fileID: 211632055}
 --- !u!4 &1671076101
 Transform:
   m_ObjectHideFlags: 0
@@ -1368,6 +1392,18 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 5b94e6d4-3612-4013-ac61-8ac8e46d8dec
     m_ActionName: Menus/FlipBackward[/Keyboard/leftArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 29eed200-c866-4c4a-bb22-413f08d6c715
+    m_ActionName: Player/Draw[/Keyboard/f]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a20254eb-8024-4b86-abfb-a8db5cd22b6d
+    m_ActionName: Player/Interact[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7e0fa3d1-7e61-410c-ad9b-45b44052c14b
+    m_ActionName: Player/Drop[/Keyboard/q]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Menus
@@ -1785,13 +1821,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5677850275520768445, guid: 901fcf2abb78b3846a610ba0aa261cd8, type: 3}
       propertyPath: m_text
-      value: "\u2620 C\u0335\u034C\u031A\u0344\u0344\u0304\u034E\u032Br\u0337\u0346\u0340\u030B\u034D\u0321\u032By\u0334\u035D\u0351\u0341\u0332\u0331\u033A\u0317\u032Di\u0334\u030D\u0359\u034E\u031E\u0347\u031Fn\u0336\u030B\u0312\u030E\u0315\u0317\u033B\u031E\u0321\u034Dg\u0335\u030D\u0343\u0311\u0320\u032E\u0354\u031C\u0339
-        \u0335\u034C\u0329\u0326\u0324\u0325S\u0338\u034C\u0329\u0339\u0359\u0332u\u0336\u035D\u035Cn\u0337\u0341\u030E\u0302\u0341\u0330\u033A\u031F\u032D\u0347
-        \u03C8"
+      value: "\u26E5 L\u0336\u0311\u0322u\u0334\u0306\u0344\u0307\u032Ec\u0338\u0341\u035D\u0344\u032Bi\u0334\u0306\u0315\u0310\u035D\u0360\u032Cf\u0334\u0305\u0341\u0342\u035B\u0353e\u0338\u031B\u0318r\u0338\u0303\u0316\u0347\u035A
+        \u26E5"
       objectReference: {fileID: 0}
     - target: {fileID: 5677850275520768445, guid: 901fcf2abb78b3846a610ba0aa261cd8, type: 3}
       propertyPath: m_fontSize
-      value: 20.45
+      value: 33.1
       objectReference: {fileID: 0}
     - target: {fileID: 6985564332003714338, guid: 901fcf2abb78b3846a610ba0aa261cd8, type: 3}
       propertyPath: m_Name

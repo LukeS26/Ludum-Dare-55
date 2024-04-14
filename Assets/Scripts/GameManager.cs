@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject startScreen, grimoire;
 
     // TextMeshProUGUI Variables
+    [SerializeField] private TextMeshProUGUI tableOfContents, pageNums;
 
     // Boolean Variables
     public static bool gameActive, gameStarted;
@@ -151,41 +152,49 @@ public class GameManager : MonoBehaviour
     // Adds Face Heap to the Grimoire
     private void AddFaceHeap()
     {
-        GameObject page = grimoire.transform.GetChild(3).gameObject;
-        page.transform.GetChild(0).gameObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text += "\nψ F̴̻̠̙̃͐̿̄̈a̴̡̰͚͒̓̾̀͜c̵̡͐ȩ̶̡̛̮͈̭͒̐̇͠ ̸̺̓Ȟ̶̦̻̜̝ͅè̸̞̼̠̏̿̋̚ͅa̶̧̤͙̞̐p̶̯̌ ⛥";
-        page.transform.GetChild(1).gameObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text += "\n...4";
+        tableOfContents.text += "\nψ F̴̻̠̙̃͐̿̄̈a̴̡̰͚͒̓̾̀͜c̵̡͐ȩ̶̡̛̮͈̭͒̐̇͠ ̸̺̓Ȟ̶̦̻̜̝ͅè̸̞̼̠̏̿̋̚ͅa̶̧̤͙̞̐p̶̯̌ ⛥";
+        pageNums.text += "\n...4";
+        maxPage = 3;
     }
 
     // Adds Archangel to the Grimoire
     private void AddArchangel()
     {
-        GameObject page = grimoire.transform.GetChild(4).gameObject;
-        page.transform.GetChild(0).gameObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text += "\n⛧ Ä̴̡̞̪̖͖́͊͝r̵̛͍̜̐̉̔c̵̢̤̜͈̏ĥ̸̡̝͗͒͌ā̷͉͙̪̹͒͜n̴̡̛̖̠̐͘̕g̴̡̨̖͎̩͊̿͝ȅ̴̱͖̿͠l̶̲̺̈̃͗ ⛧";
-        page.transform.GetChild(1).gameObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text += "\n...5";
+        tableOfContents.text += "\n⛧ Ä̴̡̞̪̖͖́͊͝r̵̛͍̜̐̉̔c̵̢̤̜͈̏ĥ̸̡̝͗͒͌ā̷͉͙̪̹͒͜n̴̡̛̖̠̐͘̕g̴̡̨̖͎̩͊̿͝ȅ̴̱͖̿͠l̶̲̺̈̃͗ ⛧";
+        pageNums.text += "\n...5";
+        maxPage = 4;
     }
 
     // Adds Ice Monster to the Grimoire
     private void AddIceMonster()
     {
-        GameObject page = grimoire.transform.GetChild(5).gameObject;
-        page.transform.GetChild(0).gameObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text += "\n☠ Ī̴̼̙̫̪̺̀̊̚͘c̷̡̛̜̼̼̿e̵̺̻̝͇̅̀̈́ ̵̥̭͍͘M̶̞̺̯̽o̶̿̅̅͜n̷̡̙͍͚̳̊͂̓ş̸̝̻͔̘̅̐̏͠t̵̢͓̱͉͑ě̷̺͚̇̑̕r̷͓̻̲̖͐̌̂͠͝ ☠";
-        page.transform.GetChild(1).gameObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text += "\n...6";
+        tableOfContents.text += "\n☠ Ī̴̼̙̫̪̺̀̊̚͘c̷̡̛̜̼̼̿e̵̺̻̝͇̅̀̈́ ̵̥̭͍͘M̶̞̺̯̽o̶̿̅̅͜n̷̡̙͍͚̳̊͂̓ş̸̝̻͔̘̅̐̏͠t̵̢͓̱͉͑ě̷̺͚̇̑̕r̷͓̻̲̖͐̌̂͠͝ ☠";
+        pageNums.text += "\n...6";
+        maxPage = 5;
     }
 
     // Adds Sumdoo to the Grimoire
     private void AddSumdo()
     {
-        GameObject page = grimoire.transform.GetChild(6).gameObject;
-        page.transform.GetChild(0).gameObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text += "\n⛧ Ş̸̼̜̗͊̂̐̃̕u̶̧͖̠̭͌̐͌̕̚m̶͍͓̊d̵̡̻̫̃̾̿͜o̵͕͇̓̓̂̏͜o̷̺͍̒̒̎̀̓ ⛥";
-        page.transform.GetChild(1).gameObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text += "\n...7";
+        tableOfContents.text += "\n⛧ Ş̸̼̜̗͊̂̐̃̕u̶̧͖̠̭͌̐͌̕̚m̶͍͓̊d̵̡̻̫̃̾̿͜o̵͕͇̓̓̂̏͜o̷̺͍̒̒̎̀̓ ⛥";
+        pageNums.text += "\n...7";
+        maxPage = 6;
     }
 
     // Adds Crying Sun to the Grimoire
     private void AddCryingSun()
     {
-        GameObject page = grimoire.transform.GetChild(7).gameObject;
-        page.transform.GetChild(0).gameObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text += "\n☠ C̵͎̫͌̈́̈́̄̚r̷̡͍̫͆̀̋y̴̲̱̺̗̭͑́͝i̴͙͎̞͇̟̍n̶̡̗̻̞͍̋̒̎̕g̵̠̮͔̜̹̍̓̑ ̵̩̦̤̥͌S̸̩̹͙̲͌u̶͜͝ń̷̰̺̟̭͇̎̂́ ψ";
-        page.transform.GetChild(1).gameObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text += "\n...8";
+        tableOfContents.text += "\n☠ C̵͎̫͌̈́̈́̄̚r̷̡͍̫͆̀̋y̴̲̱̺̗̭͑́͝i̴͙͎̞͇̟̍n̶̡̗̻̞͍̋̒̎̕g̵̠̮͔̜̹̍̓̑ ̵̩̦̤̥͌S̸̩̹͙̲͌u̶͜͝ń̷̰̺̟̭͇̎̂́ ψ";
+        pageNums.text += "\n...8";
+        maxPage = 7;
+    }
+
+    // Adds Lucifer to the Grimoire
+    private void AddLucifer()
+    {
+        tableOfContents.text += "\n⛥ L̶̢̑ŭ̴̮̈́̇ć̸̫̈́͝ĭ̴̬̐̕͝͠f̴͓̅́͂͛e̸̛̘r̸̖͇͚̃ ⛥";
+        pageNums.text += "\n...9";
+        maxPage = 8;
     }
 
     #endregion
