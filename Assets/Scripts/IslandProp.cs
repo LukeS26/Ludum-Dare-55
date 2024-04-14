@@ -12,6 +12,11 @@ public class IslandProp : MonoBehaviour
         startPosition = transform.position;
     }
 
+    private void Update()
+    {
+        //IslandSplit.Split(Time.deltaTime);
+    }
+
     public void OnTriggerStay(Collider other)
     {
         if (island == null)
