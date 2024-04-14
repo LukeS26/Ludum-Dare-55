@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 500
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Ludum_Dare_Items_1_0
+      name: Wax
       rect:
         serializedVersion: 2
         x: 135
@@ -194,7 +194,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ludum_Dare_Items_1_4
+      name: Bark
       rect:
         serializedVersion: 2
         x: 121
@@ -288,14 +288,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      Bark: 936961190
       Blood: -1645048874
       Bones: 1257052131
       Feather: -900513688
       Iron: -1878664762
-      Ludum_Dare_Items_1_0: -34638807
-      Ludum_Dare_Items_1_4: 936961190
       Meat: -1135050318
       Nightshade: 90933854
+      Wax: -34638807
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
