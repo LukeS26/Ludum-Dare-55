@@ -6,6 +6,8 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Interactions;
 
 public class PlayerController : MonoBehaviour {
+    public float walkSpeed = 10, sprintSpeed = 20, crouchSpeed = 5, jumpHeight = 1.5f, gravForce = 19.6f;
+
     public GameObject model;
 
     Quaternion movementRotation;
@@ -22,7 +24,6 @@ public class PlayerController : MonoBehaviour {
     bool sprinting;
     bool crouching;
     float gravity = 0;
-    float moveSpeed = 10;
 
     GameObject[] inventory = new GameObject[3];
 
@@ -40,7 +41,11 @@ public class PlayerController : MonoBehaviour {
     void FixedUpdate() {
         EnsureComponentsExist();
 
-        Vector3 movement = movementRotation * transform.forward * playerMovementVector.magnitude * moveSpeed * (sprinting ? 2 : 1) * (crouching ? 0.5f : 1);
+        float speed = walkSpeed;
+        if (sprinting) speed = sprintSpeed;
+        if (crouching) speed = crouchSpeed;
+
+        Vector3 movement = movementRotation * transform.forward * playerMovementVector.magnitude * speed;
         movement -= Vector3.up * gravity;
 
         controller.Move(movement * Time.fixedDeltaTime);
@@ -48,7 +53,7 @@ public class PlayerController : MonoBehaviour {
             gravity = 0;
         }
 
-        gravity += Time.fixedDeltaTime * 15;
+        gravity += Time.fixedDeltaTime * gravForce;
 
         HandleRotation();
         FixRotation();
@@ -84,9 +89,7 @@ public class PlayerController : MonoBehaviour {
         camVals.x %= 2 * Mathf.PI;
         
         camVals.y += playerLookVector.y;
-
-        if(camVals.y > 2f) { camVals.y = 2f; }
-        if(camVals.y < 0f) { camVals.y = 0f; }
+        camVals.y = Mathf.Clamp(camVals.y, 0f, 2f);
     }
 
     void FixRotation() {
@@ -99,8 +102,10 @@ public class PlayerController : MonoBehaviour {
         Camera.main.transform.localPosition = (cameraPos * (2.5f + (0.5f * cameraPos.y * cameraPos.y) ));
 
         Vector3 lookPos = new Vector3(0, 2, 0) - Camera.main.transform.localPosition;
+        Vector3 lookOffset = Vector3.up * 0.75f;
 
         Camera.main.transform.rotation = Quaternion.LookRotation(lookPos, transform.up);
+        Camera.main.transform.forward = (transform.position + lookOffset) - Camera.main.transform.position;
 
         model.transform.parent.localEulerAngles = new Vector3(
             0, 
@@ -151,10 +156,23 @@ public class PlayerController : MonoBehaviour {
     public void JumpAction(InputAction.CallbackContext obj) {
         if (!obj.performed) { return; }
         if (!controller.isGrounded) { return; }
-        gravity = -7f;
+        gravity = -Mathf.Sqrt(2f * gravForce * jumpHeight);
     }
 
     public void DrawAction(InputAction.CallbackContext obj) {
 
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Climb"))
+        {
+            Climb();
+        }
+    }
+
+    public void Climb()
+    {
+        
     }
 }
