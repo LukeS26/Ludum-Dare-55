@@ -28,10 +28,11 @@ public class PlayerController : MonoBehaviour {
     bool sprinting;
     bool crouching;
     float gravity = 0;
-    float lastGroundedElevation = 0f;
+    float lastGroundedElevation;
 
     void Awake() {
         EnsureComponentsExist();
+        lastGroundedElevation = transform.position.y;
     }
 
     void Update() {
@@ -104,7 +105,7 @@ public class PlayerController : MonoBehaviour {
         cameraPos.z = Mathf.Sin(camVals.x) * 1.5f;
         cameraPos.y = camVals.y;
 
-        Vector3 lookPos = Vector3.ProjectOnPlane(transform.position + cameraGimbal, Vector3.up) + Vector3.up * cameraGimbal.y;
+        Vector3 lookPos = Vector3.ProjectOnPlane(transform.position, Vector3.up) + cameraGimbal;
         Camera.main.transform.position = lookPos + (cameraPos * (2.5f + (0.5f * cameraPos.y * cameraPos.y)));
 
         Vector3 lookDir = lookPos - Camera.main.transform.position;
@@ -127,10 +128,10 @@ public class PlayerController : MonoBehaviour {
         hGimbal = movementRotation * transform.forward * length;
 
         if (controller.isGrounded) lastGroundedElevation = transform.position.y;
-        float depth = Mathf.Min(transform.position.y, lastGroundedElevation) + 0.75f;
-        if (Mathf.Abs(transform.position.y - lastGroundedElevation) > 7.5f) depth = transform.position.y + 0.75f;
+        float depth = Mathf.Min(transform.position.y, lastGroundedElevation);
+        if (Mathf.Abs(transform.position.y - lastGroundedElevation) > 7.5f) depth = transform.position.y;
 
-        float lerpY = Mathf.Min(Mathf.Lerp(cameraGimbal.y, depth, 3f * Time.deltaTime), transform.position.y + 0.75f);
+        float lerpY = Mathf.Min(Mathf.Lerp(cameraGimbal.y, depth + 0.75f, 3f * Time.deltaTime), transform.position.y);
         cameraGimbal = new Vector3(cameraGimbal.x, lerpY, cameraGimbal.z);
         cameraGimbal = Vector3.Lerp(cameraGimbal, hGimbal + Vector3.up * cameraGimbal.y, 1f * Time.deltaTime);
     }
