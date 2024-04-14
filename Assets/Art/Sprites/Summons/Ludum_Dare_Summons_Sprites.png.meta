@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Ludum_Dare_Summons_Sprites_0
+      name: Sumdoo
       rect:
         serializedVersion: 2
         x: 0
@@ -118,7 +118,7 @@ TextureImporter:
         width: 1000
         height: 1000
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -131,7 +131,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ludum_Dare_Summons_Sprites_1
+      name: Crying Sun
       rect:
         serializedVersion: 2
         x: 1000
@@ -139,7 +139,7 @@ TextureImporter:
         width: 1000
         height: 1000
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -152,7 +152,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ludum_Dare_Summons_Sprites_2
+      name: Face Heap
       rect:
         serializedVersion: 2
         x: 2000
@@ -160,7 +160,7 @@ TextureImporter:
         width: 1000
         height: 1000
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -183,9 +183,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Ludum_Dare_Summons_Sprites_0: 1075294259
-      Ludum_Dare_Summons_Sprites_1: 1310330712
-      Ludum_Dare_Summons_Sprites_2: 699185053
+      Crying Sun: 1310330712
+      Face Heap: 699185053
+      Sumdoo: 1075294259
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
