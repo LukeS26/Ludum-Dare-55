@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
         gameStarted = false;
 
         currPage = 1;
-        maxPage = 2;
+        maxPage = 4;
         
         DeactivatePages();
         SetToPage(currPage);
@@ -153,48 +153,48 @@ public class GameManager : MonoBehaviour
     private void AddFaceHeap()
     {
         tableOfContents.text += "\nψ F̴̻̠̙̃͐̿̄̈a̴̡̰͚͒̓̾̀͜c̵̡͐ȩ̶̡̛̮͈̭͒̐̇͠ ̸̺̓Ȟ̶̦̻̜̝ͅè̸̞̼̠̏̿̋̚ͅa̶̧̤͙̞̐p̶̯̌ ⛥";
-        pageNums.text += "\n...4";
-        maxPage = 3;
+        pageNums.text += "\n...6";
+        maxPage = 5;
     }
 
     // Adds Archangel to the Grimoire
     private void AddArchangel()
     {
         tableOfContents.text += "\n⛧ Ä̴̡̞̪̖͖́͊͝r̵̛͍̜̐̉̔c̵̢̤̜͈̏ĥ̸̡̝͗͒͌ā̷͉͙̪̹͒͜n̴̡̛̖̠̐͘̕g̴̡̨̖͎̩͊̿͝ȅ̴̱͖̿͠l̶̲̺̈̃͗ ⛧";
-        pageNums.text += "\n...5";
-        maxPage = 4;
+        pageNums.text += "\n...7";
+        maxPage = 6;
     }
 
     // Adds Ice Monster to the Grimoire
     private void AddIceMonster()
     {
         tableOfContents.text += "\n☠ Ī̴̼̙̫̪̺̀̊̚͘c̷̡̛̜̼̼̿e̵̺̻̝͇̅̀̈́ ̵̥̭͍͘M̶̞̺̯̽o̶̿̅̅͜n̷̡̙͍͚̳̊͂̓ş̸̝̻͔̘̅̐̏͠t̵̢͓̱͉͑ě̷̺͚̇̑̕r̷͓̻̲̖͐̌̂͠͝ ☠";
-        pageNums.text += "\n...6";
-        maxPage = 5;
+        pageNums.text += "\n...8";
+        maxPage = 7;
     }
 
     // Adds Sumdoo to the Grimoire
     private void AddSumdo()
     {
         tableOfContents.text += "\n⛧ Ş̸̼̜̗͊̂̐̃̕u̶̧͖̠̭͌̐͌̕̚m̶͍͓̊d̵̡̻̫̃̾̿͜o̵͕͇̓̓̂̏͜o̷̺͍̒̒̎̀̓ ⛥";
-        pageNums.text += "\n...7";
-        maxPage = 6;
+        pageNums.text += "\n...9";
+        maxPage = 8;
     }
 
     // Adds Crying Sun to the Grimoire
     private void AddCryingSun()
     {
         tableOfContents.text += "\n☠ C̵͎̫͌̈́̈́̄̚r̷̡͍̫͆̀̋y̴̲̱̺̗̭͑́͝i̴͙͎̞͇̟̍n̶̡̗̻̞͍̋̒̎̕g̵̠̮͔̜̹̍̓̑ ̵̩̦̤̥͌S̸̩̹͙̲͌u̶͜͝ń̷̰̺̟̭͇̎̂́ ψ";
-        pageNums.text += "\n...8";
-        maxPage = 7;
+        pageNums.text += "\n..10";
+        maxPage = 9;
     }
 
     // Adds Lucifer to the Grimoire
     private void AddLucifer()
     {
         tableOfContents.text += "\n⛥ L̶̢̑ŭ̴̮̈́̇ć̸̫̈́͝ĭ̴̬̐̕͝͠f̴͓̅́͂͛e̸̛̘r̸̖͇͚̃ ⛥";
-        pageNums.text += "\n...9";
-        maxPage = 8;
+        pageNums.text += "\n..11";
+        maxPage = 10;
     }
 
     #endregion
